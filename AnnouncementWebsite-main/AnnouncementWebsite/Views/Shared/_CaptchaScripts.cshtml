@@ -1,0 +1,10 @@
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6Le0MMsnAAAAAIfHv_0HgTHJIzu6teOlRPIFtQ6t"></script>
+<script>
+    grecaptcha.ready(function(){
+        window.grecaptha.execute('6Le0MMsnAAAAAIfHv_0HgTHJIzu6teOlRPIFtQ6t',{action: 'home'}).then(function(token){
+            $("#captchaInput").val(token);
+        });
+    });
+</script>

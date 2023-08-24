@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AnnouncementWebsite.Models.Announcement>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Объявления</h1>
+    <br />
+</div>
+
+<div class="container-fluid padding">
+    <div class="row">
+        <div class="row padding">
+            @if (Model != null)
+                @foreach (var item in Model)
+                {
+                    <div class="card" style="width: 26rem;margin-right:50px; margin-left: 50px; margin-top: 50px;">
+                        <img class="card-img-top" src="~/Uploads/@item.Picture" asp-append-version="true" alt="@item.Description" height="300" width="500" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Number</h5>
+                            <button data-href="@Url.Action("Action", "Announcement", new { Id = @item.Id })" type="button" class="data-btn btn btn-primary" style="text-align: center" data-toggle="modal" data-target="#actionModal"><i class="fas fa-edit mr-1"></i>Редактировать</button>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="actionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+    </div>
+</div>
+
+<script>
+    $(".data-btn").click(function () {
+        $.ajax({
+            url: $(this).attr("data-href")
+        }).done(function (response) {
+            $("#actionModal .modal-dialog").html(response);
+        });
+    });
+</script>
+
